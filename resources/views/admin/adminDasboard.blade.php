@@ -24,9 +24,6 @@
 @endsection
 
 @section('main-content')
-    
-    
-    
 
     <section class="content">
         <div class="container-fluid">
