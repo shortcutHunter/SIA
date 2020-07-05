@@ -10,6 +10,8 @@ $(function () {
     //Masked Input ============================================================================================================================
     var $demoMaskedInput = $('.demo-masked-input');
 
+    console.log($demoMaskedInput);
+
     //Date
     $demoMaskedInput.find('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
 
