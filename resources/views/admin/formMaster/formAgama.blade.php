@@ -31,7 +31,13 @@
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
-            <h2>INPUT AGAMA</h2>
+            <!-- <h2>INPUT AGAMA</h2> -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/inputagama">DATA AGAMA</a></li>
+                <li class="breadcrumb-item active">INPUT AGAMA</li>
+              </ol>
+            </nav>
         </div>
         <!-- Horizontal Layout -->
         <div class="row clearfix">
@@ -43,7 +49,12 @@
                         </h2>
                     </div>
                     <div class="body">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/admin/inputagama/{{$agama->id ?? ''}}" method="POST">
+                           @csrf
+                           @method($mode)
+
+                            <input type="hidden" name="id_record" id="id_record" value="{{$agama->id ?? ''}}" required>
+                            
                             <div class="row clearfix">
                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                     <label for="Agama">Agama</label>
@@ -51,14 +62,14 @@
                                 <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" name="agama" id="Agama" class="form-control" placeholder="Agama" required>
+                                            <input type="text" name="agama" id="Agama" class="form-control" placeholder="Agama" value="{{$agama->nama_agama ?? ''}}" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                    <button type="button" class="btn btn-primary m-t-15 waves-effect">SIMPAN</button>
+                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">SIMPAN</button>
                                 </div>
                             </div>
                         </form>

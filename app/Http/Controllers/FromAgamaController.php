@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FromAgamaController extends Controller
 {
@@ -13,8 +14,8 @@ class FromAgamaController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin/formmaster.formAgama');
+        $agamas = DB::table('master_agamas')->paginate(20);
+        return view('admin/tableMaster.tableAgama', ['agamas' => $agamas]);
     }
 
     /**
@@ -24,7 +25,7 @@ class FromAgamaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/formMaster.formAgama', ['mode' => 'POST']);
     }
 
     /**
@@ -35,7 +36,12 @@ class FromAgamaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::table('master_agamas')->insert(['nama_agama' => $request->input('agama')]);
+        } catch (Throwable $e) {
+            report($e);
+        }
+        return redirect('/admin/inputagama');
     }
 
     /**
@@ -58,6 +64,8 @@ class FromAgamaController extends Controller
     public function edit($id)
     {
         //
+        $agama = DB::table('master_agamas')->where('id', $id)->first();
+        return view('admin/formMaster.formAgama', ['agama' => $agama, 'mode' => 'PATCH']);
     }
 
     /**
@@ -69,6 +77,12 @@ class FromAgamaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
+            DB::table('master_agamas')->where('id', $id)->update(['nama_agama' => $request->input('agama')]);
+        } catch (Throwable $e) {
+            report($e);
+        }
+        return redirect('/admin/inputagama');
         //
     }
 
@@ -81,5 +95,7 @@ class FromAgamaController extends Controller
     public function destroy($id)
     {
         //
+        DB::table('master_agamas')->where('id', $id)->delete();
+        return redirect('/admin/inputagama');
     }
 }
