@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Models\Activity;
+use App\Models\master_agama;
 
 class FromAgamaController extends Controller
 {
@@ -37,7 +39,9 @@ class FromAgamaController extends Controller
     public function store(Request $request)
     {
         try {
-            DB::table('master_agamas')->insert(['nama_agama' => $request->input('agama')]);
+            $agama = new master_agama;
+            $agama->nama_agama = $request->input('agama');
+            $agama->save();
         } catch (Throwable $e) {
             report($e);
         }
@@ -78,7 +82,9 @@ class FromAgamaController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            DB::table('master_agamas')->where('id', $id)->update(['nama_agama' => $request->input('agama')]);
+            $agama = master_agama::find($id);
+            $agama->nama_agama = $request->input('agama');
+            $agama->save();
         } catch (Throwable $e) {
             report($e);
         }
@@ -95,7 +101,7 @@ class FromAgamaController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('master_agamas')->where('id', $id)->delete();
+        master_agama::find($id)->delete();
         return redirect('/admin/inputagama');
     }
 }
