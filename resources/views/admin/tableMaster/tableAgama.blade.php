@@ -28,14 +28,15 @@
 
 @section('main-content')
 
+<input type="hidden" name="token" value="{{ csrf_token() }}">
+<input type="hidden" name="table" value="master_agamas">
+
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">DATA AGAMA</li>
-              </ol>
-            </nav>
+            <ol class="breadcrumb breadcrumb-col-red">
+                <li class="breadcrumb-item">TABLE AGAMA</li>
+            </ol>
         </div>
         <!-- Horizontal Layout -->
         <div class="row clearfix">
@@ -47,60 +48,118 @@
                     <div class="body">
                         <div class="table-responsive">
                             <div class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="dt-buttons">
-                                    <a class="dt-button buttons-copy buttons-html5" href="/admin/inputagama/create"><span>Add</span></a>
-                                    <a class="dt-button buttons-csv buttons-html5" href="#"><span>CSV</span></a>
-                                    <a class="dt-button buttons-excel buttons-html5" href="#"><span>Excel</span></a>
-                                    <a class="dt-button buttons-pdf buttons-html5" href="#"><span>PDF</span></a>
-                                    <a class="dt-button buttons-print" href="#"><span>Print</span></a>
+                                <div class="row col-sm-12">
+                                    <div class="dt-buttons">
+                                        <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
+                                            <i class="material-icons">add</i>
+                                            <span>TAMBAH</span>
+                                        </a>
+                                        <button class="btn btn-danger waves-effect btn-delete-table">
+                                            <i class="material-icons">delete</i>
+                                            HAPUS
+                                        </button>
+                                        <div class="btn-group user-helper-dropdown">
+                                            <button type="button" class="btn btn-danger waves-effect" data-toggle="dropdown">
+                                                <i class="material-icons">unarchive</i>
+                                                EXPORT
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);">CSV</a></li>
+                                                <li><a href="javascript:void(0);">Excel</a></li>
+                                                <li><a href="javascript:void(0);">PDF</a></li>
+                                            </ul>
+                                        </div>
+                                        <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
+                                            <i class="material-icons">print</i>
+                                            PRINT
+                                        </a>
+                                    </div>
+                                    <div id="DataTables_Table_1_filter" class="dataTables_filter">
+                                        <label class="pull-right">
+                                            Cari:
+                                            <input type="search" class="form-control input-sm">
+                                        </label>
+                                    </div>
                                 </div>
-                                <div id="DataTables_Table_1_filter" class="dataTables_filter">
-                                    <label class="pull-right">
-                                        Search:
-                                        <input type="search" class="form-control input-sm">
-                                    </label>
-                                </div>
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
-                                                No.
-                                            </th>
-                                            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
-                                                Nama Agama
-                                            </th>
-                                            <th tabindex="0" rowspan="1" colspan="1"></th>
-                                        </tr>
-                                    </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th rowspan="1" colspan="1">No.</th>
-                                            <th rowspan="1" colspan="1">Nama Agama</th>
-                                        </tr>
-                                    </tfoot> -->
-                                    <tbody>
-                                        @foreach($agamas as $key=>$agama)
-                                            <tr>
-                                                <td>{{($agamas->perPage() * ($agamas->currentPage()-1))+$key+1}}</td>
-                                                <td>{{$agama->nama_agama}}</td>
-                                                <td>
-                                                    <form action="{{ url('/admin/inputagama', ['id' => $agama->id]) }}" method="POST" class="d-inline">
-                                                        <button class="btn btn-danger" type="submit"><i class="material-icons">delete</i></button>
-                                                        @method('delete')
-                                                        @csrf
-                                                    </form>
-                                                    <a href="/admin/inputagama/{{ $agama->id }}/edit" class="btn btn-warning">
-                                                        <i class="material-icons">edit</i>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#table" data-toggle="tab">
+                                            <i class="material-icons">border_all</i> Table
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#log" data-toggle="tab">
+                                            <i class="material-icons">history</i> Logs
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="table">
+                                        <table class="table table-bordered table-striped table-hover">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th style="width: 10px">
+                                                        <input type="checkbox" id="checkall" class="filled-in chk-col-red"/>
+                                                        <label for="checkall"></label>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
+                                                        Nama Agama
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($agamas as $key=>$agama)
+                                                    <tr>
+                                                        <td>
+                                                            <input id="check{{$agama->id}}" type="checkbox" value="{{$agama->id}}" class="filled-in chk-col-red table_check"/>
+                                                            <label for="check{{$agama->id}}"></label>
+                                                        </td>
+                                                        <td class="view-info" row_id="{{ $agama->id }}">
+                                                            {{$agama->nama_agama}}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_1_paginate">
+                                            <ul class="pagination">
+                                                {{ $agamas->links() }}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade in" id="log">
+                                        @foreach ($logs as $log)
+                                            <div class="media">
+                                                {{-- <div class="media-left">
+                                                    <a href="javascript:void(0);">
+                                                        <img class="media-object" src="http://placehold.it/64x64" width="64" height="64">
                                                     </a>
-                                                </td>
-                                            </tr>
+                                                </div> --}}
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">{{$log->description}}</h4>
+                                                    @foreach ($log->changes as $key => $values)
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5">
+                                                                <label>{{$key}}</label>
+                                                            </div>
+                                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                <table>
+                                                                    @foreach ($values as $k => $val)
+                                                                        <tr>
+                                                                            <td>{{ $k }}</td>
+                                                                            <td class="p-l-10 p-r-10">:</td>
+                                                                            <td>{{$val}}</td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </table>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_1_paginate">
-                                    <ul class="pagination">
-                                        {{ $agamas->links() }}
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -128,13 +187,15 @@
     <!-- Slimscroll Plugin Js -->
     <script src="{{ asset('adminSB/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/bootstrap-notify/bootstrap-notify.js') }}"></script>
+
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('adminSB/plugins/node-waves/waves.js') }}"></script>
 
     <!-- Custom Js -->
     <script src="{{ asset('adminSB/js/admin.js') }}"></script>
-    <script src="{{ asset('adminSB/js/pages/forms/advanced-form-elements.js') }}"></script>
+    <script src="{{ asset('adminSB/js/pages/ui/notifications.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
-    <!-- Demo Js -->
-    <script src="{{ asset('adminSB/js/demo.js') }}"></script>
 @endsection

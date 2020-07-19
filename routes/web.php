@@ -40,7 +40,8 @@ Route::resource('/admin/ruang-kuliah', 'FromMasterRuangKuliahController');
 Route::resource('/admin/jenis-perkuliahan', 'FromMasterJenisPerkuliahanController');
 
 
-
+// public route
+Route::post('/admin/master/delete', 'HomeController@delete');
 
 
 

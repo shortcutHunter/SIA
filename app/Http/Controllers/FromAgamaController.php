@@ -17,7 +17,8 @@ class FromAgamaController extends Controller
     public function index()
     {
         $agamas = DB::table('master_agamas')->paginate(20);
-        return view('admin/tableMaster.tableAgama', ['agamas' => $agamas]);
+        $logs = Activity::where('log_name', 'Master Agama')->orderByDesc('created_at')->get();
+        return view('admin/tableMaster.tableAgama', ['agamas' => $agamas, 'logs' => $logs]);
     }
 
     /**
@@ -56,7 +57,8 @@ class FromAgamaController extends Controller
      */
     public function show($id)
     {
-        //
+        $agama = DB::table('master_agamas')->where('id', $id)->first();
+        return view('admin/viewMaster.viewAgama', ['agama' => $agama]);
     }
 
     /**
@@ -88,7 +90,7 @@ class FromAgamaController extends Controller
         } catch (Throwable $e) {
             report($e);
         }
-        return redirect('/admin/inputagama');
+        return redirect('/admin/inputagama/'.$id);
         //
     }
 

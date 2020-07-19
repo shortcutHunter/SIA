@@ -31,13 +31,11 @@
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
-            <!-- <h2>INPUT AGAMA</h2> -->
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/admin/inputagama">DATA AGAMA</a></li>
-                <li class="breadcrumb-item active">INPUT AGAMA</li>
-              </ol>
-            </nav>
+            <ol class="breadcrumb breadcrumb-col-red">
+                <li class="breadcrumb-item"><a href="/admin/inputagama">TABLE AGAMA</a></li>
+                <li class="breadcrumb-item"><a href="/admin/inputagama/{{ $agama->id }}">VIEW AGAMA</a></li>
+                <li class="breadcrumb-item active">FORM AGAMA</li>
+            </ol>
         </div>
         <!-- Horizontal Layout -->
         <div class="row clearfix">
