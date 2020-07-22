@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\MasterExport;
+use App\Imports\MasterImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
@@ -36,9 +37,9 @@ class HomeController extends Controller
         try {
             $user = Auth::id();
             $ids = [];
-            $tableName = $request->table;
+            $table = $request->table;
             $model = false;
-            $className = 'App\\Models\\' . substr($tableName, 0, -1);
+            $className = 'App\\Models\\' . substr($table, 0, -1);
             if(class_exists($className)) {
                 $model = new $className;
             }
@@ -103,5 +104,12 @@ class HomeController extends Controller
         
         $agamaReport = new MasterExport($table, $ids);
         return Excel::download($agamaReport, $file_name, $this->getClassFile($file_type));
+    }
+
+    public function import(Request $request)
+    {
+        $table = $request->table;
+        $masterImport = new MasterImport($table);
+        Excel::import($masterImport, request()->file('file'));
     }
 }

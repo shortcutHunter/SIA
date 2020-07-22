@@ -1,4 +1,10 @@
 $( document ).ready(function() {
+
+    //Dropzone
+    Dropzone.options.frmFileUpload = {
+        paramName: "file",
+        maxFilesize: 2
+    };
     
     $('#checkall').on('change', function(){
         if(this.checked){
@@ -49,6 +55,42 @@ $( document ).ready(function() {
             $('#custom_form').submit();
             $('#custom_form').remove();
         }
+    });
+
+    $('.btn-import-table').on('click', function(){
+        var file_html = `
+            <form action="/master/import/file" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
+                <div class="dz-message">
+                    <div class="drag-icon-cph">
+                        <i class="material-icons">touch_app</i>
+                    </div>
+                    <h3>Click untuk upload file.</h3>
+                    <em>(Mohon untuk upload file excel saja)</em>
+                </div>
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+            </form>
+        `;
+        swal({
+            title: '',
+            text: file_html,
+            html: true,
+            showCancelButton: true,
+            showConfirmButton: false,
+            animation: "slide-from-top",
+        });
+        var token_string = $('[name=token]').val();
+        var table = $('[name=table]').val();
+        var myDropzone = new Dropzone("form.dropzone");
+        myDropzone.on('sending', function(file, xhr, formData){
+            formData.append('_token', token_string);
+            formData.append('table', table);
+        });
+        myDropzone.on("complete", function(file) {
+            myDropzone.removeFile(file);
+            window.location = getCurrentURL();
+        });
     });
 
 });

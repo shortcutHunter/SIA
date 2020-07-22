@@ -47,5 +47,8 @@ Route::post('/admin/master/delete', 'HomeController@delete');
 Route::get('{table}/export/{file_type}/{id}', 'HomeController@singleExport');
 Route::post('master/export/file', 'HomeController@export');
 
+// import file
+Route::post('master/import/file', 'HomeController@import');
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

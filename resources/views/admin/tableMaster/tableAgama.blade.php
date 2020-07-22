@@ -18,6 +18,12 @@
 
     <!-- Bootstrap Select Css -->
     <link href="{{ asset ('adminSB/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+
+    <!-- Sweetalert Css -->
+    <link href="{{ asset ('adminSB/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" />
+
+    <!-- Dropzone Css -->
+    <link href="{{ asset ('adminSB/plugins/dropzone/dropzone.css')}}" rel="stylesheet" />
  
      <!-- Custom Css -->
      <link href="{{ asset ('adminSB/css/style.css')}}" rel="stylesheet">
@@ -75,6 +81,10 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        <button class="btn btn-danger waves-effect btn-import-table" data-type="prompt">
+                                            <i class="material-icons">archive</i>
+                                            IMPORT
+                                        </button>
                                         {{-- <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
                                             <i class="material-icons">print</i>
                                             PRINT
@@ -198,6 +208,12 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('adminSB/plugins/node-waves/waves.js') }}"></script>
+
+    <!-- SweetAlert Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Dropzone Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/dropzone/dropzone.js') }}"></script>
 
     <!-- Custom Js -->
     <script src="{{ asset('adminSB/js/admin.js') }}"></script>
