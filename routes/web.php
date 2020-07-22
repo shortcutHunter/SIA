@@ -43,7 +43,9 @@ Route::resource('/admin/jenis-perkuliahan', 'FromMasterJenisPerkuliahanControlle
 // public route
 Route::post('/admin/master/delete', 'HomeController@delete');
 
-
+// export route
+Route::get('{table}/export/{file_type}/{id}', 'HomeController@singleExport');
+Route::post('master/export/file', 'HomeController@export');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

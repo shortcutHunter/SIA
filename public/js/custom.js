@@ -22,13 +22,7 @@ $( document ).ready(function() {
             }
         });
         if(ids.length == 0){
-            var colorName = 'bg-red';
-            var text = 'Mohon pilih data yang ingin dihapus';
-            var from = 'bottom';
-            var align = 'right';
-            var enter = 'animated fadeInDown';
-            var exit = 'animated fadeOutUp';
-            showNotification(colorName, text, from, align, enter, exit);
+            notify_error('Mohon pilih data yang ingin dihapus');
             return;
         }else{
             var form = generateForm(ids);
@@ -37,8 +31,37 @@ $( document ).ready(function() {
         }
     });
 
+    $('[export_file]').on('click', function(){
+        var ids = [];
+        var export_type = $(this).attr('export_file');
+        $('.table_check').each(function(){
+            if(this.checked){
+                ids.push(this.value);
+            }
+        });
+        if(ids.length == 0){
+            notify_error('Mohon pilih data yang ingin export');
+            return;
+        }else{
+            var form = generateForm(ids, '/master/export/file');
+            $('body').append(form);
+            $('#custom_form').append('<input type="hidden" name="file_type" value="'+export_type+'">');
+            $('#custom_form').submit();
+            $('#custom_form').remove();
+        }
+    });
+
 });
 
+
+function notify_error(text){
+    var colorName = 'bg-red';
+    var from = 'bottom';
+    var align = 'right';
+    var enter = 'animated fadeInDown';
+    var exit = 'animated fadeOutUp';
+    showNotification(colorName, text, from, align, enter, exit);
+}
 
 function getCurrentURL(){
     var current = window.location.pathname;
@@ -51,8 +74,7 @@ function getCurrentURL(){
     }
 }
 
-function generateForm(ids) {
-    var url = "/admin/master/delete";
+function generateForm(ids, url="/admin/master/delete") {
     var token_string = $('[name=token]').val();
     var table = $('[name=table]').val();
     var form = '<form action="' + url + '" method="POST" style="display:none;" id="custom_form">';

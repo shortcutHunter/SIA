@@ -33,7 +33,9 @@
         <div class="block-header">
             <ol class="breadcrumb breadcrumb-col-red">
                 <li class="breadcrumb-item"><a href="/admin/inputagama">TABLE AGAMA</a></li>
-                <li class="breadcrumb-item"><a href="/admin/inputagama/{{ $agama->id }}">VIEW AGAMA</a></li>
+                @isset($agama)
+                    <li class="breadcrumb-item"><a href="/admin/inputagama/{{ $agama->id }}">VIEW AGAMA</a></li>
+                @endif
                 <li class="breadcrumb-item active">FORM AGAMA</li>
             </ol>
         </div>

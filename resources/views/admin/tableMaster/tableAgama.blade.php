@@ -64,15 +64,21 @@
                                                 EXPORT
                                             </button>
                                             <ul class="dropdown-menu pull-right">
-                                                <li><a href="javascript:void(0);">CSV</a></li>
-                                                <li><a href="javascript:void(0);">Excel</a></li>
-                                                <li><a href="javascript:void(0);">PDF</a></li>
+                                                <li>
+                                                    <a export_file="csv" href="javascript:void(0);">CSV</a>
+                                                </li>
+                                                <li>
+                                                    <a export_file="xlsx" href="javascript:void(0);">Excel</a>
+                                                </li>
+                                                <li>
+                                                    <a export_file="pdf" href="javascript:void(0);">PDF</a>
+                                                </li>
                                             </ul>
                                         </div>
-                                        <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
+                                        {{-- <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
                                             <i class="material-icons">print</i>
                                             PRINT
-                                        </a>
+                                        </a> --}}
                                     </div>
                                     <div id="DataTables_Table_1_filter" class="dataTables_filter">
                                         <label class="pull-right">
