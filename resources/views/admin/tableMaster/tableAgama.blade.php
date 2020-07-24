@@ -153,25 +153,48 @@
                                                 </div> --}}
                                                 <div class="media-body">
                                                     <h4 class="media-heading">{{$log->description}}</h4>
-                                                    @foreach ($log->changes as $key => $values)
-                                                        <div class="row clearfix">
-                                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5">
-                                                                <label>{{$key}}</label>
+                                                    @if ($log->description == 'Mass delete')
+                                                        @foreach ($log->properties as $key => $values)
+                                                            <div class="row clearfix">
+                                                                <div class="col-sm-1">
+                                                                    <label>{{$key}}</label>
+                                                                </div>
+                                                                <div class="col-sm-11">
+                                                                    <table>
+                                                                        @foreach ($values as $k => $val)
+                                                                            <tr>
+                                                                                <td>{{$val}}</td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                                                <table>
-                                                                    @foreach ($values as $k => $val)
-                                                                        <tr>
-                                                                            <td>{{ $k }}</td>
-                                                                            <td class="p-l-10 p-r-10">:</td>
-                                                                            <td>{{$val}}</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </table>
-                                                                
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($log->changes as $key => $values)
+                                                            <div class="row clearfix">
+                                                                <div class="col-sm-1">
+                                                                    <label>{{$key}}</label>
+                                                                </div>
+                                                                <div class="col-sm-11">
+                                                                    <table>
+                                                                        @foreach ($values as $k => $val)
+                                                                            @if($val)
+                                                                                <tr>
+                                                                                    <td>{{ $k }}</td>
+                                                                                    <td class="p-l-10 p-r-10">=</td>
+                                                                                    <td>{{$val}}</td>
+                                                                                </tr>
+                                                                            @endif
+                                                                            
+                                                                        @endforeach
+                                                                    </table>
+                                                                    
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    @endforeach
+                                                        @endforeach
+                                                    @endif                                                   
+                                                    
                                                 </div>
                                             </div>
                                         @endforeach

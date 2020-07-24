@@ -21,6 +21,13 @@ Route::get('/admin', function () {
     return view('admin.adminDasboard');
 });
 
+// Route::get('/login/admin', function () {
+//     return view('admin.login');
+// });
+
+// login form
+// Route::post('/login/admin', 'HomeController@login');
+
 // form master perkuliahan
 Route::resource('/admin/inputtahunajaran', 'FromTahunAjaranController');
 Route::resource('/admin/inputmatakuliah', 'FromMataKuliahController');

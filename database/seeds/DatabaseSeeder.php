@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,6 +43,34 @@ class DatabaseSeeder extends Seeder
         	['keterangan' => 'Umum', 'created_at' => Carbon::now()],
         	['keterangan' => 'Wajib', 'created_at' => Carbon::now()],
         	['keterangan' => 'Pilihan', 'created_at' => Carbon::now()],
+        ]);
+
+        $master_menu_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Agama', 
+            'link' => '/admin/inputagama', 
+            'category' => 'Master Form Data Diri', 
+            'created_at' => Carbon::now()
+        ]);
+
+        $user_id = DB::table('users')->insertGetId([
+            'nama_user' => 'admin', 
+            'email' => 'admin@admin.com', 
+            'password' => Hash::make('admin'),
+            'created_at' => Carbon::now()
+        ]);
+
+        $role_id = DB::table('master_roles')->insertGetId([
+            'nama_role' => 'Admin', 
+            'created_at' => Carbon::now(),
+        ]);
+
+        DB::table('master_role_rels')->insert([
+            [
+                'kode_master_role' => $role_id, 
+                'kode_master_menu' => $master_menu_id, 
+                'kode_user' => $user_id, 
+                'created_at' => Carbon::now()
+            ],
         ]);
     }
 }

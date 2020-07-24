@@ -17,7 +17,7 @@ class FromAgamaController extends Controller
     public function index()
     {
         $agamas = DB::table('master_agamas')->paginate(20);
-        $logs = Activity::where('log_name', 'Master Agama')->orderByDesc('created_at')->get();
+        $logs = Activity::inLog('Master Agama')->orderByDesc('created_at')->get();
         return view('admin/tableMaster.tableAgama', ['agamas' => $agamas, 'logs' => $logs]);
     }
 

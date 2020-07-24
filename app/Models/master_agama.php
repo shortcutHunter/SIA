@@ -11,9 +11,15 @@ class master_agama extends Model
     use LogsActivity;
     use CausesActivity;
 
-    protected $fillable = ['*'];
+    protected static $ignoreChangedAttributes = ['created_at', 'updated_at'];
+    
+    protected static $logAttributes = ['id', 'nama_agama'];
 
-    protected static $logAttributes = ['*'];
 
     protected static $logName = 'Master Agama';
+
+    public function getLogName()
+    {
+        return "Master Agama";
+    }
 }

@@ -17,6 +17,7 @@ class CreateMasterMenusTable extends Migration
             $table->id();
             $table->string('nama_menu')->unique();
             $table->string('link');
+            $table->string('category');
             $table->timestamps();
         });
     }

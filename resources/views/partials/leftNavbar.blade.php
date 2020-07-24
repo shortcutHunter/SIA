@@ -59,7 +59,7 @@
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">accessibility</i>
-                        <span>Master Form Data Diri</span>
+                        <span>Master Data Diri</span>
                     </a>
                     <ul class="ml-menu">
                         <li>
@@ -71,7 +71,7 @@
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">perm_identity</i>
-                        <span>Master Form Karyawan</span>
+                        <span>Master Karyawan</span>
                     </a>
                     <ul class="ml-menu">
                         <li>
@@ -98,18 +98,18 @@
                     </ul>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="pages/typography.html">
                         <i class="material-icons">text_fields</i>
                         <span>Typography</span>
                     </a>
-                </li>
+                </li> --}}
         </div>
         <!-- #Menu -->
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">
-                &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+                &copy; 2016 - {{date('Y')}} <a href="javascript:void(0);">AdminBSB - Material Design</a>.
             </div>
             <div class="version">
                 <b>Version: </b> 1.0.5

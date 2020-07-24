@@ -49,9 +49,10 @@ class HomeController extends Controller
                     array_push($ids, $value);
                 }
             }
+            
             DB::table($request->table)->whereIn('id', $ids)->delete();
 
-            activity()
+            activity($model->getLogName())
                 ->performedOn($model)
                 ->causedBy($user)
                 ->withProperties(['ids' => $ids])
@@ -112,4 +113,14 @@ class HomeController extends Controller
         $masterImport = new MasterImport($table);
         Excel::import($masterImport, request()->file('file'));
     }
+
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->only('nama_user', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         // Authentication passed...
+    //         return redirect()->intended('admin');
+    //     }
+    // }
 }
