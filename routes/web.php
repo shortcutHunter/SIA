@@ -19,14 +19,7 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
     return view('admin.adminDasboard');
-});
-
-// Route::get('/login/admin', function () {
-//     return view('admin.login');
-// });
-
-// login form
-// Route::post('/login/admin', 'HomeController@login');
+})->middleware('auth');
 
 // form master perkuliahan
 Route::resource('/admin/inputtahunajaran', 'FromTahunAjaranController');

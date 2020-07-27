@@ -103,11 +103,13 @@
                                             <i class="material-icons">border_all</i> Table
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#log" data-toggle="tab">
-                                            <i class="material-icons">history</i> Logs
-                                        </a>
-                                    </li>
+                                    @can('AuthName', 'Log')
+                                        <li>
+                                            <a href="#log" data-toggle="tab">
+                                                <i class="material-icons">history</i> Logs
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="table">
@@ -143,62 +145,64 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade in" id="log">
-                                        @foreach ($logs as $log)
-                                            <div class="media">
-                                                {{-- <div class="media-left">
-                                                    <a href="javascript:void(0);">
-                                                        <img class="media-object" src="http://placehold.it/64x64" width="64" height="64">
-                                                    </a>
-                                                </div> --}}
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">{{$log->description}}</h4>
-                                                    @if ($log->description == 'Mass delete')
-                                                        @foreach ($log->properties as $key => $values)
-                                                            <div class="row clearfix">
-                                                                <div class="col-sm-1">
-                                                                    <label>{{$key}}</label>
-                                                                </div>
-                                                                <div class="col-sm-11">
-                                                                    <table>
-                                                                        @foreach ($values as $k => $val)
-                                                                            <tr>
-                                                                                <td>{{$val}}</td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach ($log->changes as $key => $values)
-                                                            <div class="row clearfix">
-                                                                <div class="col-sm-1">
-                                                                    <label>{{$key}}</label>
-                                                                </div>
-                                                                <div class="col-sm-11">
-                                                                    <table>
-                                                                        @foreach ($values as $k => $val)
-                                                                            @if($val)
+                                    @can('AuthName', 'Log')
+                                        <div class="tab-pane fade in" id="log">
+                                            @foreach ($logs as $log)
+                                                <div class="media">
+                                                    {{-- <div class="media-left">
+                                                        <a href="javascript:void(0);">
+                                                            <img class="media-object" src="http://placehold.it/64x64" width="64" height="64">
+                                                        </a>
+                                                    </div> --}}
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">{{$log->description}}</h4>
+                                                        @if ($log->description == 'Mass delete')
+                                                            @foreach ($log->properties as $key => $values)
+                                                                <div class="row clearfix">
+                                                                    <div class="col-sm-1">
+                                                                        <label>{{$key}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-11">
+                                                                        <table>
+                                                                            @foreach ($values as $k => $val)
                                                                                 <tr>
-                                                                                    <td>{{ $k }}</td>
-                                                                                    <td class="p-l-10 p-r-10">=</td>
                                                                                     <td>{{$val}}</td>
                                                                                 </tr>
-                                                                            @endif
-                                                                            
-                                                                        @endforeach
-                                                                    </table>
-                                                                    
+                                                                            @endforeach
+                                                                        </table>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @endif                                                   
-                                                    
+                                                            @endforeach
+                                                        @else
+                                                            @foreach ($log->changes as $key => $values)
+                                                                <div class="row clearfix">
+                                                                    <div class="col-sm-1">
+                                                                        <label>{{$key}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-11">
+                                                                        <table>
+                                                                            @foreach ($values as $k => $val)
+                                                                                @if($val)
+                                                                                    <tr>
+                                                                                        <td>{{ $k }}</td>
+                                                                                        <td class="p-l-10 p-r-10">=</td>
+                                                                                        <td>{{$val}}</td>
+                                                                                    </tr>
+                                                                                @endif
+                                                                                
+                                                                            @endforeach
+                                                                        </table>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif                                                   
+                                                        
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                            @endforeach
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>
                         </div>

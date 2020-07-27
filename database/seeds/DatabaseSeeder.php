@@ -59,14 +59,25 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()
         ]);
 
-        $role_id = DB::table('master_roles')->insertGetId([
-            'nama_role' => 'Admin', 
+        $role_agama_id = DB::table('master_roles')->insertGetId([
+            'nama_role' => 'Master Agama', 
+            'created_at' => Carbon::now(),
+        ]);
+
+        $role_log_id = DB::table('master_roles')->insertGetId([
+            'nama_role' => 'Log', 
             'created_at' => Carbon::now(),
         ]);
 
         DB::table('master_role_rels')->insert([
             [
-                'kode_master_role' => $role_id, 
+                'kode_master_role' => $role_agama_id, 
+                'kode_master_menu' => $master_menu_id, 
+                'kode_user' => $user_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_role' => $role_log_id, 
                 'kode_master_menu' => $master_menu_id, 
                 'kode_user' => $user_id, 
                 'created_at' => Carbon::now()

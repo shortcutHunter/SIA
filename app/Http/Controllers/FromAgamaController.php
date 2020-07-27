@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\master_agama;
+use App\Models\master_role;
+use Illuminate\Support\Facades\Gate;
 
 class FromAgamaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $master_agama_role = master_role::where('nama_role', 'Master Agama')->first();
+        $this->middleware('CheckAuth:'.$master_agama_role->id);
+    }
     /**
      * Display a listing of the resource.
      *

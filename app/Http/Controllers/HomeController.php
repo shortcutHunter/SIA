@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -113,14 +113,4 @@ class HomeController extends Controller
         $masterImport = new MasterImport($table);
         Excel::import($masterImport, request()->file('file'));
     }
-
-    // public function login(Request $request)
-    // {
-    //     $credentials = $request->only('nama_user', 'password');
-
-    //     if (Auth::attempt($credentials)) {
-    //         // Authentication passed...
-    //         return redirect()->intended('admin');
-    //     }
-    // }
 }
