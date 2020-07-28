@@ -50,12 +50,22 @@ class HomeController extends Controller
                 }
             }
             
-            DB::table($request->table)->whereIn('id', $ids)->delete();
+            $records = $model->whereIn('id', $ids);
+            $fieldName = $model->getFieldName();
+
+            $properties = $records->get()->map(function ($item, $key) use ($fieldName){
+                return [
+                    'id' => $item->id,
+                    'name' => $item[$fieldName]
+                ];
+            });
+
+            $records->delete();
 
             activity($model->getLogName())
                 ->performedOn($model)
                 ->causedBy($user)
-                ->withProperties(['ids' => $ids])
+                ->withProperties($properties->all())
                 ->log('Mass delete');
 
         } catch (Throwable $e) {

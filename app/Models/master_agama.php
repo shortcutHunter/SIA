@@ -18,8 +18,13 @@ class master_agama extends Model
 
     protected static $logName = 'Master Agama';
 
-    public function getLogName()
+    static function getLogName()
     {
         return "Master Agama";
+    }
+
+    static function getFieldName()
+    {
+        return 'nama_agama';
     }
 }

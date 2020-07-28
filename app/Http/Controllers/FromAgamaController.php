@@ -14,6 +14,7 @@ class FromAgamaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $role_name = master_agama::getLogName();
         $master_agama_role = master_role::where('nama_role', 'Master Agama')->first();
         $this->middleware('CheckAuth:'.$master_agama_role->id);
     }

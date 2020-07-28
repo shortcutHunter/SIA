@@ -146,58 +146,47 @@
                                         </div>
                                     </div>
                                     @can('AuthName', 'Log')
-                                        <div class="tab-pane fade in" id="log">
+                                        <div class="tab-pane fade in p-l-10 p-r-10 p-t-10 p-b-10" id="log" style="background: #e9e9e9">
                                             @foreach ($logs as $log)
-                                                <div class="media">
-                                                    {{-- <div class="media-left">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="media-object" src="http://placehold.it/64x64" width="64" height="64">
-                                                        </a>
-                                                    </div> --}}
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">{{$log->description}}</h4>
-                                                        @if ($log->description == 'Mass delete')
-                                                            @foreach ($log->properties as $key => $values)
-                                                                <div class="row clearfix">
-                                                                    <div class="col-sm-1">
-                                                                        <label>{{$key}}</label>
-                                                                    </div>
-                                                                    <div class="col-sm-11">
-                                                                        <table>
-                                                                            @foreach ($values as $k => $val)
-                                                                                <tr>
-                                                                                    <td>{{$val}}</td>
-                                                                                </tr>
-                                                                            @endforeach
-                                                                        </table>
-                                                                    </div>
+                                                <div class="card">
+                                                    <div class="header">
+                                                        {{$log->description}} by {{$log->causer->nama_user}}
+                                                    </div>
+                                                    <div class="body">
+                                                        @switch($log->description)
+                                                            @case('Mass delete')
+                                                                <div class="d-flex">
+                                                                    @foreach ($log->properties as $key => $values)
+                                                                        <div class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-original-title="id = {{$values['id']}}">
+                                                                            {{$values['name']}}
+                                                                        </div>
+                                                                    @endforeach
                                                                 </div>
-                                                            @endforeach
-                                                        @else
-                                                            @foreach ($log->changes as $key => $values)
-                                                                <div class="row clearfix">
-                                                                    <div class="col-sm-1">
-                                                                        <label>{{$key}}</label>
-                                                                    </div>
-                                                                    <div class="col-sm-11">
-                                                                        <table>
-                                                                            @foreach ($values as $k => $val)
-                                                                                @if($val)
-                                                                                    <tr>
-                                                                                        <td>{{ $k }}</td>
-                                                                                        <td class="p-l-10 p-r-10">=</td>
-                                                                                        <td>{{$val}}</td>
-                                                                                    </tr>
-                                                                                @endif
-                                                                                
-                                                                            @endforeach
-                                                                        </table>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif                                                   
-                                                        
+                                                            @break
+                                                            @case('updated')
+                                                                <table>
+                                                                    @foreach ($log->changes['old'] as $key => $item)
+                                                                        <tr>
+                                                                            <td class="font-bold">{{$key}}</td>
+                                                                            <td class="p-l-10 p-r-10">:</td>
+                                                                            <td>{{$item}}</td>
+                                                                            <td class="p-l-10 p-r-10">-></td>
+                                                                            <td>{{$log->changes['attributes'][$key]}}</td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </table>
+                                                            @break
+                                                            @default
+                                                            <table>
+                                                                @foreach ($log->changes['attributes'] as $key => $item)
+                                                                    <tr>
+                                                                        <td class="font-bold">{{$key}}</td>
+                                                                        <td class="p-l-10 p-r-10">:</td>
+                                                                        <td>{{$item}}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </table>
+                                                        @endswitch
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -241,6 +230,10 @@
 
     <!-- Dropzone Plugin Js -->
     <script src="{{ asset('adminSB/plugins/dropzone/dropzone.js') }}"></script>
+
+    <!-- Tooltip & Popover Js -->
+    <script src="{{ asset('adminSB/js/pages/ui/tooltips-popovers.js') }}"></script>
+
 
     <!-- Custom Js -->
     <script src="{{ asset('adminSB/js/admin.js') }}"></script>
