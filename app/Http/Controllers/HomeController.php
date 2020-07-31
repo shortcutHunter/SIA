@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Exports\MasterExport;
 use App\Imports\MasterImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Exception;
+use Helper;
 
 class HomeController extends Controller
 {
@@ -40,9 +42,7 @@ class HomeController extends Controller
             $table = $request->table;
             $model = false;
             $className = 'App\\Models\\' . substr($table, 0, -1);
-            if(class_exists($className)) {
-                $model = new $className;
-            }
+            $model = new $className;
 
             foreach($request->all() as $key => $value){
                 if(preg_match('/record_id/i', $key)){
@@ -67,9 +67,11 @@ class HomeController extends Controller
                 ->causedBy($user)
                 ->withProperties($properties->all())
                 ->log('Mass delete');
-
-        } catch (Throwable $e) {
+        
+        alert()->success('Data berhasil dihapus');
+        } catch (Exception $e) {
             report($e);
+            Helper::ErrorHandler('Data gagal dihapus', $e->getMessage());
         }
         return redirect($request->url);
     }
@@ -119,8 +121,13 @@ class HomeController extends Controller
 
     public function import(Request $request)
     {
-        $table = $request->table;
-        $masterImport = new MasterImport($table);
-        Excel::import($masterImport, request()->file('file'));
+        try{
+            $table = $request->table;
+            $masterImport = new MasterImport($table);
+            Excel::import($masterImport, request()->file('file'));
+        } catch (Exception $e) {
+            report($e);
+            Helper::ErrorHandlerAPI('Data gagal dihapus', $e->getMessage());
+        }        
     }
 }

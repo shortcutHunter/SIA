@@ -150,7 +150,8 @@
                                             @foreach ($logs as $log)
                                                 <div class="card">
                                                     <div class="header">
-                                                        {{$log->description}} by {{$log->causer->nama_user}}
+                                                        {{$log->description}} by {{$log->causer->nama_user}} 
+                                                        <div class="text-muted small">{{$log->created_at}}</div>
                                                     </div>
                                                     <div class="body">
                                                         @switch($log->description)
@@ -161,6 +162,22 @@
                                                                             {{$values['name']}}
                                                                         </div>
                                                                     @endforeach
+                                                                </div>
+                                                            @break
+                                                            @case('Import')
+                                                                <div class="d-flex">
+                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                        @foreach ($log->properties as $key => $values)
+                                                                            @foreach ($values as $k => $v)
+                                                                                @if($key == 0)
+                                                                                    <th>{{$k}}</th>
+                                                                                @endif
+                                                                                <tr>
+                                                                                    <td>{{$v}}</td>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        @endforeach
+                                                                    </table>
                                                                 </div>
                                                             @break
                                                             @case('updated')

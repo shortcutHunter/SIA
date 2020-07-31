@@ -8,6 +8,9 @@ use Spatie\Activitylog\Models\Activity;
 use App\Models\master_agama;
 use App\Models\master_role;
 use Illuminate\Support\Facades\Gate;
+use Alert;
+use Exception;
+use Helper;
 
 class FromAgamaController extends Controller
 {
@@ -52,8 +55,10 @@ class FromAgamaController extends Controller
             $agama = new master_agama;
             $agama->nama_agama = $request->input('agama');
             $agama->save();
-        } catch (Throwable $e) {
+            alert()->success('Data berhasil ditambahkan');
+        } catch (Exception $e) {
             report($e);
+            Helper::ErrorHandler('Data gagal ditambahkan', $e->getMessage());
         }
         return redirect('/admin/inputagama');
     }
@@ -96,8 +101,10 @@ class FromAgamaController extends Controller
             $agama = master_agama::find($id);
             $agama->nama_agama = $request->input('agama');
             $agama->save();
-        } catch (Throwable $e) {
+            alert()->success('Data berhasil diubah');
+        } catch (Exception $e) {
             report($e);
+            Helper::ErrorHandler('Data gagal diubah', $e->getMessage());
         }
         return redirect('/admin/inputagama/'.$id);
         //
@@ -112,7 +119,13 @@ class FromAgamaController extends Controller
     public function destroy($id)
     {
         //
-        master_agama::find($id)->delete();
+        try{
+            master_agama::find($id)->delete();
+            alert()->success('Data berhasil dihapus');
+        } catch (Exception $e) {
+            Helper::ErrorHandler('Data gagal dihapus', $e->getMessage());
+        }
+        
         return redirect('/admin/inputagama');
     }
 }

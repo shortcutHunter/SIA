@@ -12,8 +12,14 @@
 
     @yield('name')
     @yield('css')
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
 </head>
 <body class="theme-red">
+
+    @include('sweet::alert')
+
     @include('partials.loader')
     @include('partials.topNavbar')
     @include('partials.leftNavbar')

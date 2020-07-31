@@ -87,17 +87,25 @@ $( document ).ready(function() {
             formData.append('_token', token_string);
             formData.append('table', table);
         });
-        myDropzone.on("complete", function(file) {
+        myDropzone.on("success", function(file) {
             myDropzone.removeFile(file);
-            window.location = getCurrentURL();
+            swal.close();
+            notify_error('Import successfully', 'bg-green');
+            setTimeout(() => {
+                window.location = getCurrentURL();
+            }, 3000);
+        });
+        myDropzone.on('error', function(file, response) {
+            myDropzone.removeFile(file);
+            swal.close();
+            notify_error(response.message);
         });
     });
 
 });
 
 
-function notify_error(text){
-    var colorName = 'bg-red';
+function notify_error(text, colorName="bg-red"){
     var from = 'bottom';
     var align = 'right';
     var enter = 'animated fadeInDown';

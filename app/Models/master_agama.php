@@ -15,12 +15,11 @@ class master_agama extends Model
     
     protected static $logAttributes = ['id', 'nama_agama'];
 
-
     protected static $logName = 'Master Agama';
 
-    static function getLogName()
+    public static function getLogName()
     {
-        return "Master Agama";
+        return self::$logName;
     }
 
     static function getFieldName()
