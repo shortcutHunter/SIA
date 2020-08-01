@@ -93,7 +93,7 @@ $( document ).ready(function() {
             notify_error('Import successfully', 'bg-green');
             setTimeout(() => {
                 window.location = getCurrentURL();
-            }, 3000);
+            }, 1000);
         });
         myDropzone.on('error', function(file, response) {
             myDropzone.removeFile(file);

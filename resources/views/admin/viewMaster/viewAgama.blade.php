@@ -86,7 +86,7 @@
                                 <label for="Agama">Updated</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <span>{{ \Carbon\Carbon::parse($agama->updated_at)->diffForHumans() }}</span>
+                                <span>{{ $agama->updated_at }}</span>
                             </div>
                         </div>
                         <div class="row clearfix">
@@ -94,7 +94,7 @@
                                 <label for="Agama">Created</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <span>{{ \Carbon\Carbon::parse($agama->created_at)->diffForHumans() }}</span>
+                                <span>{{ $agama->created_at }}</span>
                             </div>
                         </div>                        
                     </div>

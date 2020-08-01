@@ -17,6 +17,8 @@ class master_agama extends Model
 
     protected static $logName = 'Master Agama';
 
+    protected $fillable = ['nama_agama'];
+
     public static function getLogName()
     {
         return self::$logName;
@@ -25,5 +27,15 @@ class master_agama extends Model
     static function getFieldName()
     {
         return 'nama_agama';
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans();
     }
 }

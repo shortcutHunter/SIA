@@ -71,7 +71,7 @@ class FromAgamaController extends Controller
      */
     public function show($id)
     {
-        $agama = DB::table('master_agamas')->where('id', $id)->first();
+        $agama = master_agama::where('id', $id)->first();
         return view('admin/viewMaster.viewAgama', ['agama' => $agama]);
     }
 

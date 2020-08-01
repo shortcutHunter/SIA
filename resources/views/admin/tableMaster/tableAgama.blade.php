@@ -55,16 +55,16 @@
                         <div class="table-responsive">
                             <div class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row col-sm-12">
-                                    <div class="dt-buttons">
-                                        <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
+                                    <div class="dt-buttons d-flex">
+                                        <a class="btn btn-danger waves-effect m-r-5" href="/admin/inputagama/create">
                                             <i class="material-icons">add</i>
                                             <span>TAMBAH</span>
                                         </a>
-                                        <button class="btn btn-danger waves-effect btn-delete-table">
+                                        <button class="btn btn-danger waves-effect btn-delete-table m-r-5">
                                             <i class="material-icons">delete</i>
                                             HAPUS
                                         </button>
-                                        <div class="btn-group user-helper-dropdown">
+                                        <div class="btn-group user-helper-dropdown m-r-5">
                                             <button type="button" class="btn btn-danger waves-effect" data-toggle="dropdown">
                                                 <i class="material-icons">unarchive</i>
                                                 EXPORT
@@ -76,12 +76,12 @@
                                                 <li>
                                                     <a export_file="xlsx" href="javascript:void(0);">Excel</a>
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <a export_file="pdf" href="javascript:void(0);">PDF</a>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
-                                        <button class="btn btn-danger waves-effect btn-import-table" data-type="prompt">
+                                        <button class="btn btn-danger waves-effect btn-import-table m-r-5" data-type="prompt">
                                             <i class="material-icons">archive</i>
                                             IMPORT
                                         </button>

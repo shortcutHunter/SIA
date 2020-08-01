@@ -30,13 +30,15 @@ class MasterImport implements ToCollection
         foreach ($rows as $row) 
         {
             $value = [];
+            $new_record = new $className;
             foreach($fillable as $key => $field){
                 $value[$field] = $row[$key];
+                $new_record[$field] = $row[$key];
             }
+            $new_record->disableLogging()->save();
+            $new_record->enableLogging();
             array_push($values, $value);
         }
-        $model->insert($values);
-
         activity($model->getLogName())
                 ->performedOn($model)
                 ->causedBy($user)
