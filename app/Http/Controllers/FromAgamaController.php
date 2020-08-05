@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\master_agama;
-use App\Models\master_role;
+use App\Models\master_module;
 use Illuminate\Support\Facades\Gate;
 use Alert;
 use Exception;
@@ -17,20 +17,28 @@ class FromAgamaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $role_name = master_agama::getLogName();
-        $master_agama_role = master_role::where('nama_role', 'Master Agama')->first();
-        $this->middleware('CheckAuth:'.$master_agama_role->id);
+        $module_name = master_agama::getLogName();
+        $master_agama_module = master_module::where('nama_module', $module_name)->first();
+        $this->middleware('CheckAuth:'.$master_agama_module->id);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $agamas = DB::table('master_agamas')->paginate(20);
+        $agamas = DB::table('master_agamas');
+        $keyword = '';
+        if(isset($request->keyword)){
+            $agamas = $agamas->where('nama_agama', 'like', '%'.$request->keyword.'%');
+            $keyword = $request->keyword;
+        }
+        $agamas = $agamas->paginate(20)->setPath('');
+        $agamas->appends(array('keyword' => $keyword));
+        
         $logs = Activity::inLog('Master Agama')->orderByDesc('created_at')->get();
-        return view('admin/tableMaster.tableAgama', ['agamas' => $agamas, 'logs' => $logs]);
+        return view('admin/tableMaster.tableAgama', ['agamas' => $agamas, 'logs' => $logs, 'keyword' => $keyword]);
     }
 
     /**

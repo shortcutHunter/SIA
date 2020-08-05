@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ErrorLog extends Model
+class master_module_rel extends Model
 {
     //
 }

@@ -45,41 +45,53 @@ class DatabaseSeeder extends Seeder
         	['keterangan' => 'Pilihan', 'created_at' => Carbon::now()],
         ]);
 
-        $master_menu_id = DB::table('master_menus')->insertGetId([
+        $master_menu_agama_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Agama', 
             'link' => '/admin/inputagama', 
             'category' => 'Master Form Data Diri', 
             'created_at' => Carbon::now()
         ]);
-
-        $user_id = DB::table('users')->insertGetId([
-            'nama_user' => 'admin', 
-            'email' => 'admin@admin.com', 
-            'password' => Hash::make('admin'),
-            'created_at' => Carbon::now()
-        ]);
-
-        $role_agama_id = DB::table('master_roles')->insertGetId([
-            'nama_role' => 'Master Agama', 
+        
+        $role_admin_id = DB::table('master_roles')->insertGetId([
+            'nama_role' => 'Admin', 
             'created_at' => Carbon::now(),
         ]);
 
-        $role_log_id = DB::table('master_roles')->insertGetId([
-            'nama_role' => 'Log', 
+        DB::table('users')->insert([
+            'nama_user' => 'admin', 
+            'email' => 'admin@admin.com', 
+            'password' => Hash::make('admin'),
+            'kode_master_role' => $role_admin_id,
+            'created_at' => Carbon::now()
+        ]);
+
+        $module_log_id = DB::table('master_modules')->insertGetId([
+            'nama_module' => 'Log', 
+            'created_at' => Carbon::now(),
+        ]);
+
+        $module_role_id = DB::table('master_modules')->insertGetId([
+            'nama_module' => 'Master Agama', 
             'created_at' => Carbon::now(),
         ]);
 
         DB::table('master_role_rels')->insert([
             [
-                'kode_master_role' => $role_agama_id, 
-                'kode_master_menu' => $master_menu_id, 
-                'kode_user' => $user_id, 
+                'kode_master_role' => $role_admin_id, 
+                'kode_master_module' => $module_role_id, 
                 'created_at' => Carbon::now()
             ],
             [
-                'kode_master_role' => $role_log_id, 
-                'kode_master_menu' => $master_menu_id, 
-                'kode_user' => $user_id, 
+                'kode_master_role' => $role_admin_id, 
+                'kode_master_module' => $module_log_id, 
+                'created_at' => Carbon::now()
+            ],
+        ]);
+
+        DB::table('master_module_rels')->insert([
+            [
+                'kode_master_menu' => $master_menu_agama_id, 
+                'kode_master_module' => $module_role_id, 
                 'created_at' => Carbon::now()
             ],
         ]);

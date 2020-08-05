@@ -1,10 +1,11 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\master_role_rel;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getListModuleId()
+    {
+        $list_module_id = master_role_rel::where('kode_master_role', $this->kode_master_role)->pluck('id')->toArray();
+        return $list_module_id;
+    }
 }

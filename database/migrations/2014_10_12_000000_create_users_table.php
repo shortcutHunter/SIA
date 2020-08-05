@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('kode_master_role')->constrained('master_roles');
             $table->rememberToken();
             $table->timestamps();
         });

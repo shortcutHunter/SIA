@@ -56,10 +56,10 @@
                 <ul class="dropdown-menu pull-right">
                     <li><a href="/master_agamas/export/csv/{{$agama->id}}">CSV</a></li>
                     <li><a href="/master_agamas/export/xlsx/{{$agama->id}}">Excel</a></li>
-                    <li><a href="/master_agamas/export/pdf/{{$agama->id}}">PDF</a></li>
+                    {{-- <li><a href="/master_agamas/export/pdf/{{$agama->id}}">PDF</a></li> --}}
                 </ul>
             </div>
-            {{-- <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
+            {{-- <a class="btn btn-danger waves-effect m-r-5" href="/admin/inputagama/create">
                 <i class="material-icons">print</i>
                 PRINT
             </a> --}}

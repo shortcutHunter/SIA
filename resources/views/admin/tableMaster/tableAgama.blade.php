@@ -55,7 +55,7 @@
                         <div class="table-responsive">
                             <div class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row col-sm-12">
-                                    <div class="dt-buttons d-flex">
+                                    <div class="dt-buttons">
                                         <a class="btn btn-danger waves-effect m-r-5" href="/admin/inputagama/create">
                                             <i class="material-icons">add</i>
                                             <span>TAMBAH</span>
@@ -92,8 +92,16 @@
                                     </div>
                                     <div id="DataTables_Table_1_filter" class="dataTables_filter">
                                         <label class="pull-right">
-                                            Cari:
-                                            <input type="search" class="form-control input-sm">
+                                            <form class="input-group" action="/admin/inputagama" method="GET">
+                                                <div class="form-line">
+                                                    <input type="text" name="keyword" class="form-control date" placeholder="Cari..." value="{{$keyword}}">
+                                                </div>
+                                                <span class="input-group-addon">
+                                                    <button class="btn btn-default p-b-0 p-t-0 p-r-5 p-l-5">
+                                                        <i class="material-icons">search</i>
+                                                    </button>
+                                                </span>
+                                            </form>
                                         </label>
                                     </div>
                                 </div>
@@ -253,8 +261,8 @@
 
 
     <!-- Custom Js -->
-    <script src="{{ asset('adminSB/js/admin.js') }}"></script>
     <script src="{{ asset('adminSB/js/pages/ui/notifications.js') }}"></script>
+    <script src="{{ asset('adminSB/js/admin.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 
 @endsection
