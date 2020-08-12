@@ -8,6 +8,17 @@ use Spatie\Activitylog\Traits\CausesActivity;
 
 class master_agama extends Model
 {
+    public function mahasiswa()
+    {
+        return $this->hasMany('App\Models\mahasiswa', 'kode_agama', 'id');
+    }
+    
+    public function master_dosen()
+    {
+        return $this->hasMany('App\Models\master_dosen', 'kode_agama', 'id');
+    }
+
+
     use LogsActivity;
     use CausesActivity;
 

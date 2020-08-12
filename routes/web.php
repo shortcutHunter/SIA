@@ -17,9 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('admin.adminDasboard');
-})->middleware('auth');
+Route::get('/admin', 'HomeController@home');
+Route::get('/admin/profil', 'HomeController@admin');
 
 // form master perkuliahan
 Route::resource('/admin/inputtahunajaran', 'FromTahunAjaranController');

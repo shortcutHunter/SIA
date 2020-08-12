@@ -15,17 +15,11 @@ class CreateTransaksiNilaisTable extends Migration
     {
         Schema::create('transaksi_nilais', function (Blueprint $table) {
             $table->id();
-            $table->integer('nim_mahasiswa');
-            $table->string('kode_mata_kuliah');
+            $table->foreignId('kode_kartu_studi')->constrained('kartu_studis');
             $table->string('keterangan');
             $table->integer('bobot');
             $table->integer('nilai');
             $table->timestamps();
-        });
-
-        Schema::table('transaksi_nilais', function (Blueprint $table) {
-            $table->foreign('nim_mahasiswa')->references('nim')->on('mahasiswas');
-            $table->foreign('kode_mata_kuliah')->references('kode_mata_kuliah')->on('master_mata_kuliahs');
         });
     }
 

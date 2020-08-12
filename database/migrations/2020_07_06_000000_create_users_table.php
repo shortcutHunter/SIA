@@ -20,8 +20,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->foreignId('kode_master_role')->constrained('master_roles');
+            $table->integer('nim_mahasiswa')->nullable();
+            $table->foreignId('kode_dosen')->nullable()->constrained('master_dosens');
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('nim_mahasiswa')->references('nim')->on('mahasiswas');
         });
     }
 

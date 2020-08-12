@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\master_agama;
 use App\Models\master_module;
+use App\Models\master_menu;
 use Illuminate\Support\Facades\Gate;
 use Alert;
 use Exception;
@@ -17,9 +18,16 @@ class FromAgamaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        // Check Authorization
         $module_name = master_agama::getLogName();
         $master_agama_module = master_module::where('nama_module', $module_name)->first();
         $this->middleware('CheckAuth:'.$master_agama_module->id);
+
+        // Set menu to active
+        $master_menu = master_menu::where('nama_menu', 'Agama')->first();
+        config(['active_nav' => $master_menu->nama_menu]);
+        config(['active_category' => $master_menu->category]);
     }
     /**
      * Display a listing of the resource.

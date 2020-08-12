@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterMenusTable extends Migration
+class CreateMataKuliahRelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateMasterMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_menus', function (Blueprint $table) {
+        Schema::create('mata_kuliah_rels', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_menu')->unique();
-            $table->string('link');
-            $table->string('category');
-            $table->string('icon');
+            $table->foreignId('kode_kartu_studi')->constrained('kartu_studis');
+            $table->foreignId('kode_mata_kuliah')->constrained('master_mata_kuliahs');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateMasterMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_menus');
+        Schema::dropIfExists('mata_kuliah_rels');
     }
 }

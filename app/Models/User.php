@@ -9,6 +9,21 @@ use App\Models\master_role_rel;
 
 class User extends Authenticatable
 {
+    public function mahasiswa()
+    {
+        return $this->hasOne('App\Models\mahasiswa', 'nim', 'kode_mahasiswa');
+    }
+
+    public function master_dosen()
+    {
+        return $this->hasOne('App\Models\master_dosen', 'id', 'kode_dosen');
+    }
+
+    public function master_role()
+    {
+        return $this->belongsTo('App\Models\master_role', 'kode_master_role', 'id');
+    }
+
     use Notifiable;
 
     /**
@@ -37,10 +52,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function getListModuleId()
-    {
-        $list_module_id = master_role_rel::where('kode_master_role', $this->kode_master_role)->pluck('id')->toArray();
-        return $list_module_id;
-    }
 }

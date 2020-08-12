@@ -22,6 +22,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        config(['active_nav' => 'Home']);
     }
 
     /**
@@ -32,6 +33,18 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function home()
+    {
+        $user = Auth::user();
+        return view('admin.adminDasboard');
+    }
+
+    public function admin()
+    {
+        
+        return view('admin.formMaster.formProfil');
     }
 
     public function delete(Request $request)

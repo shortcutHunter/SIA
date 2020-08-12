@@ -7,16 +7,12 @@
                 <img src="{{asset ('adminSB/images/user.png')}}" width="48" height="48" alt="User" />
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                <div class="email">john.doe@example.com</div>
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->nama_user }}</div>
+                <div class="email">{{Auth::user()->email}}</div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                        <li><a href="/admin/profil"><i class="material-icons">person</i>Profil</a></li>
                         <li role="separator" class="divider"></li>
                         <li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -34,7 +30,37 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="active">
+
+                @foreach ($master_menu as $category => $menus)
+                    
+                    @if ($category == '')
+                        @foreach ($menus as $menu)
+                            <li class="{{ config('active_nav') == $menu['nama_menu'] ? 'active' : '' }}">
+                                <a href="{{$menu['link']}}">
+                                    <i class="material-icons">{{$menu['icon']}}</i>
+                                    <span>{{$menu['nama_menu']}}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    @else
+                        <li class="{{ config('active_category') == $category ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle {{ config('active_category') == $category ? 'toggled' : '' }}">
+                                <i class="material-icons">{{$menus[0]['icon']}}</i>
+                                <span>{{$category}}</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @foreach ($menus as $menu)
+                                    <li class="{{ config('active_nav') == $menu['nama_menu'] ? 'active' : '' }}">
+                                        <a href="{{$menu['link']}}">{{$menu['nama_menu']}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+
+                @endforeach
+
+                {{-- <li class="{{ config('active_nav') == 'Home' ? 'active' : '' }}">
                     <a href="/admin">
                         <i class="material-icons">home</i>
                         <span>Home</span>
@@ -62,13 +88,13 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
+                <li class="{{ config('active_category') == 'Master Data Diri' ? 'active' : '' }}">
+                    <a href="javascript:void(0);" class="menu-toggle {{ config('active_category') == 'Master Data Diri' ? 'toggled' : '' }}">
                         <i class="material-icons">accessibility</i>
                         <span>Master Data Diri</span>
                     </a>
                     <ul class="ml-menu">
-                        <li>
+                        <li class="{{ config('active_nav') == 'Agama' ? 'active' : '' }}">
                             <a href="{{route('inputagama.index')}}">Agama</a>
                         </li>
                     </ul>
@@ -102,7 +128,7 @@
                             <a href="{{route('jenis-perkuliahan.index')}}">Jenis Mata Kuliah</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 {{-- <li>
                     <a href="pages/typography.html">
@@ -112,18 +138,9 @@
                 </li> --}}
         </div>
         <!-- #Menu -->
-        <!-- Footer -->
-        <div class="legal">
-            <div class="copyright">
-                &copy; 2016 - {{date('Y')}} <a href="javascript:void(0);">AdminBSB - Material Design</a>.
-            </div>
-            <div class="version">
-                <b>Version: </b> 1.0.5
-            </div>
-        </div>
-        <!-- #Footer -->
     </aside>
     <!-- #END# Left Sidebar -->
+
     <!-- Right Sidebar -->
     <aside id="rightsidebar" class="right-sidebar">
         <ul class="nav nav-tabs tab-nav-right" role="tablist">

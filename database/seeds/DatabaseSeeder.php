@@ -45,13 +45,96 @@ class DatabaseSeeder extends Seeder
         	['keterangan' => 'Pilihan', 'created_at' => Carbon::now()],
         ]);
 
+
+####################
+# MASTER DATA MENU #
+####################
+
+        // Home
+        $master_menu_home_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Home', 
+            'link' => '/admin', 
+            'category' => '', 
+            'icon' => 'home', 
+            'created_at' => Carbon::now()
+        ]);
+
+        // Master Form Perkuliahan
+        $master_menu_tahun_ajaran_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Tahun Ajaran', 
+            'link' => '/admin/inputtahunajaran', 
+            'category' => 'Master Form Perkuliahan', 
+            'icon' => 'widgets', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_jurusan_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Jurusan', 
+            'link' => '/admin/jurusan', 
+            'category' => 'Master Form Perkuliahan', 
+            'icon' => 'widgets', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_mata_kuliah_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Mata Kuliah', 
+            'link' => '/admin/inputmatakuliah', 
+            'category' => 'Master Form Perkuliahan', 
+            'icon' => 'widgets', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_jadwal_mata_kuliah_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Jadwal Mata Kuliah', 
+            'link' => '/admin/jadwal-kuliah', 
+            'category' => 'Master Form Perkuliahan', 
+            'icon' => 'widgets', 
+            'created_at' => Carbon::now()
+        ]);
+
+        // Master Data Diri
         $master_menu_agama_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Agama', 
             'link' => '/admin/inputagama', 
-            'category' => 'Master Form Data Diri', 
+            'category' => 'Master Data Diri', 
+            'icon' => 'accessibility', 
+            'created_at' => Carbon::now()
+        ]);
+
+        // Master Karyawan
+        $master_menu_dosen_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Dosen', 
+            'link' => '/admin/dosen', 
+            'category' => 'Master Karyawan', 
+            'icon' => 'perm_identity', 
+            'created_at' => Carbon::now()
+        ]);
+
+        // Master Status
+        $master_menu_role_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Role', 
+            'link' => '/admin/master-role', 
+            'category' => 'Master Status', 
+            'icon' => 'code', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_ruang_kuliah_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Ruangan Kuliah', 
+            'link' => '/admin/ruang-kuliah', 
+            'category' => 'Master Status', 
+            'icon' => 'code', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_jenis_mata_kuliah_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Jenis Mata Kuliah', 
+            'link' => '/admin/jenis-perkuliahan', 
+            'category' => 'Master Status', 
+            'icon' => 'code', 
             'created_at' => Carbon::now()
         ]);
         
+####################
+# MASTER DATA MENU #
+####################
+        
+
         $role_admin_id = DB::table('master_roles')->insertGetId([
             'nama_role' => 'Admin', 
             'created_at' => Carbon::now(),
