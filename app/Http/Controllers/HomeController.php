@@ -11,6 +11,7 @@ use App\Imports\MasterImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Exception;
 use Helper;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -37,15 +38,79 @@ class HomeController extends Controller
 
     public function home()
     {
-        $user = Auth::user();
         return view('admin.adminDasboard');
     }
 
-    public function admin()
+    public function viewProfil()
     {
-        
-        return view('admin.formMaster.formProfil');
+        $user = Auth::user();
+        $user_type = $user->kode_dosen ? 'dosen' : 'admin';        
+        return view('admin.viewMaster.viewProfil', ['user_type' => $user_type]);
     }
+
+
+    public function editProfil()
+    {
+        $user = Auth::user();
+        $user_type = $user->kode_dosen ? 'dosen' : 'admin';
+        return view('admin.formMaster.formProfil', ['user_type' => $user_type]);
+    }
+
+    public function upateProfil(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            switch ($request->user_type) {
+                case 'dosen':
+                    
+                break;
+                
+                default:
+
+                    $user->nama_user = $request->nama_user;
+                    $user->email = $request->email;
+                    $user->save();
+                break;
+            }
+
+            alert()->success('Data berhasil diupdate');
+        } catch (Exception $e) {
+            report($e);
+            Helper::ErrorHandler('Data gagal diupdate', $e->getMessage());
+        }
+        return redirect('/admin/profil');
+    }
+
+    public function editPassword()
+    {
+        return view('admin.formMaster.formPassword');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $password = $request->password_baru;
+            if (Hash::check($request->password_lama, $user->password)) {
+                if ($password == $request->konfirmasi_password_baru) {
+                    $password = Hash::make($password);
+                    $user->password = $password;
+                    $user->save();
+                    alert()->success('Password berhasil diganti');
+                }else{
+                    alert()->error('Konfirmasi Password tidak sama');
+                }
+            }else{
+                alert()->error('Password lama tidak cocok');
+            }
+        } catch (Exception $e) {
+            report($e);
+            Helper::ErrorHandler('Password gagal diganti', $e->getMessage());
+        }
+        
+        return redirect('/admin/profil');
+    }
+
 
     public function delete(Request $request)
     {

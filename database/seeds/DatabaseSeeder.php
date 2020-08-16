@@ -59,32 +59,32 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()
         ]);
 
-        // Master Form Perkuliahan
+        // Master Perkuliahan
         $master_menu_tahun_ajaran_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Tahun Ajaran', 
             'link' => '/admin/inputtahunajaran', 
-            'category' => 'Master Form Perkuliahan', 
+            'category' => 'Master Perkuliahan', 
             'icon' => 'widgets', 
             'created_at' => Carbon::now()
         ]);
         $master_menu_jurusan_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Jurusan', 
             'link' => '/admin/jurusan', 
-            'category' => 'Master Form Perkuliahan', 
+            'category' => 'Master Perkuliahan', 
             'icon' => 'widgets', 
             'created_at' => Carbon::now()
         ]);
         $master_menu_mata_kuliah_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Mata Kuliah', 
             'link' => '/admin/inputmatakuliah', 
-            'category' => 'Master Form Perkuliahan', 
+            'category' => 'Master Perkuliahan', 
             'icon' => 'widgets', 
             'created_at' => Carbon::now()
         ]);
         $master_menu_jadwal_mata_kuliah_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Jadwal Mata Kuliah', 
             'link' => '/admin/jadwal-kuliah', 
-            'category' => 'Master Form Perkuliahan', 
+            'category' => 'Master Perkuliahan', 
             'icon' => 'widgets', 
             'created_at' => Carbon::now()
         ]);
@@ -148,20 +148,39 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()
         ]);
 
+#################
+# MASTER MODULE #
+#################
+
         $module_log_id = DB::table('master_modules')->insertGetId([
             'nama_module' => 'Log', 
             'created_at' => Carbon::now(),
         ]);
-
-        $module_role_id = DB::table('master_modules')->insertGetId([
-            'nama_module' => 'Master Agama', 
+        $module_data_diri_id = DB::table('master_modules')->insertGetId([
+            'nama_module' => 'Master Data Diri', 
             'created_at' => Carbon::now(),
         ]);
+        $module_master_perkuliahan_id = DB::table('master_modules')->insertGetId([
+            'nama_module' => 'Master Perkuliahan', 
+            'created_at' => Carbon::now(),
+        ]);
+        $module_master_karyawan_id = DB::table('master_modules')->insertGetId([
+            'nama_module' => 'Master Karyawan', 
+            'created_at' => Carbon::now(),
+        ]);
+        $module_master_status_id = DB::table('master_modules')->insertGetId([
+            'nama_module' => 'Master Status', 
+            'created_at' => Carbon::now(),
+        ]);
+
+#################
+# MASTER MODULE #
+#################
 
         DB::table('master_role_rels')->insert([
             [
                 'kode_master_role' => $role_admin_id, 
-                'kode_master_module' => $module_role_id, 
+                'kode_master_module' => $module_data_diri_id, 
                 'created_at' => Carbon::now()
             ],
             [
@@ -169,12 +188,67 @@ class DatabaseSeeder extends Seeder
                 'kode_master_module' => $module_log_id, 
                 'created_at' => Carbon::now()
             ],
+            [
+                'kode_master_role' => $role_admin_id, 
+                'kode_master_module' => $module_master_perkuliahan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_role' => $role_admin_id, 
+                'kode_master_module' => $module_master_karyawan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_role' => $role_admin_id, 
+                'kode_master_module' => $module_master_status_id, 
+                'created_at' => Carbon::now()
+            ],
         ]);
 
         DB::table('master_module_rels')->insert([
             [
+                'kode_master_menu' => $master_menu_tahun_ajaran_id, 
+                'kode_master_module' => $module_master_perkuliahan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_jurusan_id, 
+                'kode_master_module' => $module_master_perkuliahan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_mata_kuliah_id, 
+                'kode_master_module' => $module_master_perkuliahan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_jadwal_mata_kuliah_id, 
+                'kode_master_module' => $module_master_perkuliahan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
                 'kode_master_menu' => $master_menu_agama_id, 
-                'kode_master_module' => $module_role_id, 
+                'kode_master_module' => $module_data_diri_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_dosen_id, 
+                'kode_master_module' => $module_master_karyawan_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_role_id, 
+                'kode_master_module' => $module_master_status_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_ruang_kuliah_id, 
+                'kode_master_module' => $module_master_status_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_jenis_mata_kuliah_id, 
+                'kode_master_module' => $module_master_status_id, 
                 'created_at' => Carbon::now()
             ],
         ]);

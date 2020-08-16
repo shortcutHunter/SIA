@@ -18,7 +18,16 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', 'HomeController@home');
-Route::get('/admin/profil', 'HomeController@admin');
+
+// profil
+Route::get('/admin/profil', 'HomeController@viewProfil');
+Route::get('/admin/edit/profil', 'HomeController@editProfil');
+Route::put('/admin/update/profil', 'HomeController@upateProfil');
+
+// password
+Route::get('/admin/edit/password', 'HomeController@editPassword');
+Route::put('/admin/update/password', 'HomeController@updatePassword');
+
 
 // form master perkuliahan
 Route::resource('/admin/inputtahunajaran', 'FromTahunAjaranController');

@@ -8222,3 +8222,11 @@ html.ie11 .bs-searchbox .form-control {
   align-items: center;
   flex-wrap: wrap;
 }
+
+.big-font {
+  font-size: 25px;
+}
+
+h1 input {
+  font-size: inherit !important;
+}

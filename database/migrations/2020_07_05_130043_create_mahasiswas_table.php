@@ -16,7 +16,7 @@ class CreateMahasiswasTable extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->integer('nim')->unique();
             $table->string('nama_mahasiswa');
-            $table->integer('kode_jurusan');
+            $table->foreignId('kode_jurusan')->constrained('master_jurusans');
             $table->foreignId('kode_tahun_ajaran')->constrained('master_tahun_ajarans');
             $table->integer('semester_mata_kuliah');
             $table->enum('jenis_kelamin', ['laki_laki','perempuan']);
@@ -28,10 +28,6 @@ class CreateMahasiswasTable extends Migration
             $table->enum('status', ['active', 'cuti', 'tidak_active']);
             $table->foreignId('kode_agama')->constrained('master_agamas');
             $table->timestamps();
-        });
-
-        Schema::table('mahasiswas', function (Blueprint $table) {
-            $table->foreign('kode_jurusan')->references('kode_jurusan')->on('master_jurusans');
         });
     }
 

@@ -19,7 +19,7 @@ class CreateMasterMataKuliahsTable extends Migration
             $table->string('nama_mata_kuliah');
             $table->foreignId('kode_status_mata_kuliah')->constrained('master_jenis_mata_kuliahs');
             $table->integer('penanggung_jawab_nindn');
-            $table->string('kode_jurusan');
+            $table->foreignId('kode_jurusan')->constrained('master_jurusans');
             $table->foreignId('kode_tahun_ajaran')->constrained('master_tahun_ajarans');
             $table->integer('semester_mata_kuliah')->index();
             $table->timestamps();

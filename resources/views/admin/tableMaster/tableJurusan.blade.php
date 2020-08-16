@@ -10,19 +10,25 @@
                 <label for="checkall"></label>
             </th>
             <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
-                Nama Agama
+                Nama Jurusan
+            </th>
+            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
+                Alias
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach($datas as $key=>$agama)
+        @foreach($datas as $key=>$jurusan)
             <tr>
                 <td>
-                    <input id="check{{$agama->id}}" type="checkbox" value="{{$agama->id}}" class="filled-in chk-col-red table_check"/>
-                    <label for="check{{$agama->id}}"></label>
+                    <input id="check{{$jurusan->id}}" type="checkbox" value="{{$jurusan->id}}" class="filled-in chk-col-red table_check"/>
+                    <label for="check{{$jurusan->id}}"></label>
                 </td>
-                <td class="view-info" row_id="{{ $agama->id }}">
-                    {{$agama->nama_agama}}
+                <td class="view-info" row_id="{{ $jurusan->id }}">
+                    {{$jurusan->nama_jurusan}}
+                </td>
+                <td class="view-info" row_id="{{ $jurusan->id }}">
+                    {{$jurusan->alias}}
                 </td>
             </tr>
         @endforeach

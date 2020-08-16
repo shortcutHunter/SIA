@@ -15,7 +15,6 @@ class CreateMasterJurusansTable extends Migration
     {
         Schema::create('master_jurusans', function (Blueprint $table) {
             $table->id();
-            $table->integer('kode_jurusan')->unique();
             $table->string('nama_jurusan');
             $table->string('alias');
             $table->timestamps();
