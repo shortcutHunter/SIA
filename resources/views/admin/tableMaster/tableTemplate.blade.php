@@ -64,7 +64,7 @@
                                             <i class="material-icons">delete</i>
                                             HAPUS
                                         </button>
-                                        <div class="btn-group user-helper-dropdown m-r-5">
+                                        {{-- <div class="btn-group user-helper-dropdown m-r-5">
                                             <button type="button" class="btn btn-danger waves-effect" data-toggle="dropdown">
                                                 <i class="material-icons">unarchive</i>
                                                 EXPORT
@@ -76,15 +76,12 @@
                                                 <li>
                                                     <a export_file="xlsx" href="javascript:void(0);">Excel</a>
                                                 </li>
-                                                {{-- <li>
-                                                    <a export_file="pdf" href="javascript:void(0);">PDF</a>
-                                                </li> --}}
                                             </ul>
-                                        </div>
-                                        <button class="btn btn-danger waves-effect btn-import-table m-r-5" data-type="prompt">
+                                        </div> --}}
+                                        {{-- <button class="btn btn-danger waves-effect btn-import-table m-r-5" data-type="prompt">
                                             <i class="material-icons">archive</i>
                                             IMPORT
-                                        </button>
+                                        </button> --}}
                                         {{-- <a class="btn btn-danger waves-effect" href="/admin/inputagama/create">
                                             <i class="material-icons">print</i>
                                             PRINT
