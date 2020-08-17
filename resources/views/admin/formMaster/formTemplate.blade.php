@@ -18,6 +18,12 @@
 
     <!-- Bootstrap Select Css -->
     <link href="{{ asset ('adminSB/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="{{ asset ('adminSB/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="{{ asset ('adminSB/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
  
      <!-- Custom Css -->
      <link href="{{ asset ('adminSB/css/style.css')}}" rel="stylesheet">
@@ -86,11 +92,45 @@
     <!-- Slimscroll Plugin Js -->
     <script src="{{ asset('adminSB/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 
+    <!-- Colorpicker Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
+
+    <!-- Dropzone Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/dropzone/dropzone.js') }}"></script>
+
+    <!-- Input Mask Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
+
+    <!-- Multi Select Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/multi-select/js/jquery.multi-select.js') }}"></script>
+
+    <!-- Jquery Spinner Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/jquery-spinner/js/jquery.spinner.js') }}"></script>
+
+    <!-- Bootstrap Tags Input Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
+
+    <!-- noUISlider Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/nouislider/nouislider.js') }}"></script>
+
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('adminSB/plugins/node-waves/waves.js') }}"></script>
 
+    <!-- Autosize Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/autosize/autosize.js') }}"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/momentjs/moment.js') }}"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="{{ asset('adminSB/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+
     <!-- Custom Js -->
     <script src="{{ asset('adminSB/js/admin.js') }}"></script>
+    <script src="{{ asset('adminSB/js/pages/forms/basic-form-elements.js') }}"></script>
     <script src="{{ asset('adminSB/js/pages/forms/advanced-form-elements.js') }}"></script>
 
     <!-- Demo Js -->

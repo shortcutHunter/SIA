@@ -30,6 +30,13 @@ $(function () {
 
     $('#bs_datepicker_component_container').datepicker({
         autoclose: true,
+        format: 'dd MM yyyy',
+        container: '#bs_datepicker_component_container'
+    });
+
+    $('#bs_datepicker_component_container_2').datepicker({
+        autoclose: true,
+        format: 'dd MM yyyy',
         container: '#bs_datepicker_component_container'
     });
     //

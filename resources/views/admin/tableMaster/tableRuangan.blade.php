@@ -10,7 +10,10 @@
                 <label for="checkall"></label>
             </th>
             <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
-                Nama Agama
+                Kode Ruangan
+            </th>
+            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
+                Nama Ruangan
             </th>
         </tr>
     </thead>
@@ -22,7 +25,10 @@
                     <label for="check{{$data->id}}"></label>
                 </td>
                 <td class="view-info" row_id="{{ $data->id }}">
-                    {{$data->nama_agama}}
+                    {{$data->kode_ruangan}}
+                </td>
+                <td class="view-info" row_id="{{ $data->id }}">
+                    {{$data->nama_ruangan}}
                 </td>
             </tr>
         @endforeach

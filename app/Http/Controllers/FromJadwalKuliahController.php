@@ -2,85 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\master_mata_kuliah;
+use App\Models\master_ruangan;
 
-class FromJadwalKuliahController extends Controller
+class FromJadwalKuliahController extends CrudController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        return view('admin/formmaster.formjadwalKuliah');
+    protected $table_name = 'jadwal_kuliahs';
+    protected $menu_name = 'Jadwal Mata Kuliah';
+    protected $module_name = 'Master Perkuliahan';
+    protected $class_name = 'jadwal_kuliah';
+    protected $view_table = 'admin.tableMaster.tableJadwalkuliah';
+    protected $view_form = 'admin.formMaster.formJadwalkuliah';
+    protected $view_data = 'admin.viewMaster.viewJadwalkuliah';
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    function getSelection()
     {
-        //
-    }
+       $mata_kuliah_selection = master_mata_kuliah::All();
+       $ruangan_selection = master_ruangan::All();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return [
+            'mata_kuliah_selection' => $mata_kuliah_selection,
+            'ruangan_selection'     => $ruangan_selection,
+        ];
     }
 }

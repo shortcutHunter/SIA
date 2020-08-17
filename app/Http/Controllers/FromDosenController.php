@@ -2,84 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\master_status_pendidikan;
+use App\Models\master_agama;
+use App\Models\master_status_dosen;
+use App\Models\master_status_kerja_dosen;
 
-class FromDosenController extends Controller
+class FromDosenController extends CrudController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        return view('admin/formmaster.formDosen');
-    }
+    protected $table_name = 'master_dosens';
+    protected $menu_name = 'Dosen';
+    protected $module_name = 'Master Karyawan';
+    protected $class_name = 'master_dosen';
+    protected $view_table = 'admin.tableMaster.tableDosen';
+    protected $view_form = 'admin.formMaster.formDosen';
+    protected $view_data = 'admin.viewMaster.viewDosen';
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    function getSelection()
     {
-        //
-    }
+       $pendidikan_selection = master_status_pendidikan::All();
+       $agama_selection = master_agama::All();
+       $status_selection = master_status_dosen::All();
+       $status_kerja_selection = master_status_kerja_dosen::All();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return [
+        	'pendidikan_selection'		=> $pendidikan_selection,
+			'agama_selection'			=> $agama_selection,
+			'status_selection'			=> $status_selection,
+			'status_kerja_selection'	=> $status_kerja_selection
+        ];
     }
 }

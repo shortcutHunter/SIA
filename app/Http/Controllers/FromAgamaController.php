@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 class FromAgamaController extends CrudController
 {
-
     protected $table_name = 'master_agamas';
     protected $menu_name = 'Agama';
     protected $module_name = 'Master Data Diri';

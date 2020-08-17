@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('master_status_dosens')->insert([
-        	['nama_status' => 'active', 'created_at' => Carbon::now()],
-        	['nama_status' => 'non_active', 'created_at' => Carbon::now()],
+        	['nama_status' => 'Active', 'created_at' => Carbon::now()],
+        	['nama_status' => 'Non Active', 'created_at' => Carbon::now()],
         	['nama_status' => 'cuti', 'created_at' => Carbon::now()],
         ]);
 
@@ -97,6 +97,13 @@ class DatabaseSeeder extends Seeder
             'icon' => 'accessibility', 
             'created_at' => Carbon::now()
         ]);
+        $master_menu_pendidikan_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Pendidikan', 
+            'link' => '/admin/inputpendidikan', 
+            'category' => 'Master Data Diri', 
+            'icon' => 'accessibility', 
+            'created_at' => Carbon::now()
+        ]);
 
         // Master Karyawan
         $master_menu_dosen_id = DB::table('master_menus')->insertGetId([
@@ -108,13 +115,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Master Status
-        $master_menu_role_id = DB::table('master_menus')->insertGetId([
-            'nama_menu' => 'Role', 
-            'link' => '/admin/master-role', 
-            'category' => 'Master Status', 
-            'icon' => 'code', 
-            'created_at' => Carbon::now()
-        ]);
+        // $master_menu_role_id = DB::table('master_menus')->insertGetId([
+        //     'nama_menu' => 'Role', 
+        //     'link' => '/admin/master-role', 
+        //     'category' => 'Master Status', 
+        //     'icon' => 'code', 
+        //     'created_at' => Carbon::now()
+        // ]);
         $master_menu_ruang_kuliah_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Ruangan Kuliah', 
             'link' => '/admin/ruang-kuliah', 
@@ -125,6 +132,20 @@ class DatabaseSeeder extends Seeder
         $master_menu_jenis_mata_kuliah_id = DB::table('master_menus')->insertGetId([
             'nama_menu' => 'Jenis Mata Kuliah', 
             'link' => '/admin/jenis-perkuliahan', 
+            'category' => 'Master Status', 
+            'icon' => 'code', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_status_dosen_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Status Dosen', 
+            'link' => '/admin/status-dosen', 
+            'category' => 'Master Status', 
+            'icon' => 'code', 
+            'created_at' => Carbon::now()
+        ]);
+        $master_menu_status_kerja_dosen_id = DB::table('master_menus')->insertGetId([
+            'nama_menu' => 'Status Kerja Dosen', 
+            'link' => '/admin/status-kerja-dosen', 
             'category' => 'Master Status', 
             'icon' => 'code', 
             'created_at' => Carbon::now()
@@ -232,15 +253,20 @@ class DatabaseSeeder extends Seeder
                 'created_at' => Carbon::now()
             ],
             [
+                'kode_master_menu' => $master_menu_pendidikan_id, 
+                'kode_master_module' => $module_data_diri_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
                 'kode_master_menu' => $master_menu_dosen_id, 
                 'kode_master_module' => $module_master_karyawan_id, 
                 'created_at' => Carbon::now()
             ],
-            [
-                'kode_master_menu' => $master_menu_role_id, 
-                'kode_master_module' => $module_master_status_id, 
-                'created_at' => Carbon::now()
-            ],
+            // [
+            //     'kode_master_menu' => $master_menu_role_id, 
+            //     'kode_master_module' => $module_master_status_id, 
+            //     'created_at' => Carbon::now()
+            // ],
             [
                 'kode_master_menu' => $master_menu_ruang_kuliah_id, 
                 'kode_master_module' => $module_master_status_id, 
@@ -248,6 +274,16 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_master_menu' => $master_menu_jenis_mata_kuliah_id, 
+                'kode_master_module' => $module_master_status_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_status_dosen_id, 
+                'kode_master_module' => $module_master_status_id, 
+                'created_at' => Carbon::now()
+            ],
+            [
+                'kode_master_menu' => $master_menu_status_kerja_dosen_id, 
                 'kode_master_module' => $module_master_status_id, 
                 'created_at' => Carbon::now()
             ],

@@ -14,5 +14,10 @@ class master_tahun_ajaran extends BaseModel
 		return $this->hasMany('App\Models\mahasiswa', 'kode_tahun_ajaran', 'id');
     }
 
+    public function master_mata_kuliah()
+    {
+		return $this->hasMany('App\Models\master_mata_kuliah', 'kode_tahun_ajaran', 'id');
+    }
+
 
 }

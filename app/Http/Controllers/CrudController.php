@@ -73,7 +73,9 @@ class CrudController extends Controller
      */
     public function create()
     {
-        return view($this->view_form, ['mode' => 'POST']);
+        $view_data = $this->getSelection();
+        $view_data['mode'] = 'POST';
+        return view($this->view_form, $view_data);
     }
 
     /**
@@ -119,7 +121,10 @@ class CrudController extends Controller
     public function edit($id)
     {
         $data = $this->class_model->where('id', $id)->first();
-        return view($this->view_form, ['data' => $data, 'mode' => 'PATCH']);
+        $view_data = $this->getSelection();
+        $view_data['data'] = $data;
+        $view_data['mode'] = 'PATCH';
+        return view($this->view_form, $view_data);
     }
 
     /**
@@ -163,5 +168,10 @@ class CrudController extends Controller
         }
         
         return redirect($this->base_url);
+    }
+
+    public function getSelection()
+    {
+        return [];
     }
 }

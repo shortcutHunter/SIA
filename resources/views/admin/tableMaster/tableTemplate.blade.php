@@ -122,6 +122,11 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="table">
                                         @yield('table-content')
+                                        <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_1_paginate">
+                                            <ul class="pagination">
+                                                {{ $datas->links() }}
+                                            </ul>
+                                        </div>
                                     </div>
                                     @can('AuthName', 'Log')
                                         <div class="tab-pane fade in p-l-10 p-r-10 p-t-10 p-b-10" id="log" style="background: #e9e9e9">

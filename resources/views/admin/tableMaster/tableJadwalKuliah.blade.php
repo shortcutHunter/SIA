@@ -10,7 +10,16 @@
                 <label for="checkall"></label>
             </th>
             <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
-                Nama Agama
+                Mata Kuliah
+            </th>
+            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
+                Waktu
+            </th>
+            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
+                Hari
+            </th>
+            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">
+                Ruangan
             </th>
         </tr>
     </thead>
@@ -22,7 +31,16 @@
                     <label for="check{{$data->id}}"></label>
                 </td>
                 <td class="view-info" row_id="{{ $data->id }}">
-                    {{$data->nama_agama}}
+                    {{$data->master_mata_kuliah->nama_mata_kuliah}}
+                </td>
+                <td class="view-info" row_id="{{ $data->id }}">
+                    {{$data->waktu}}
+                </td>
+                <td class="view-info" row_id="{{ $data->id }}">
+                    {{$data->hari}}
+                </td>
+                <td class="view-info" row_id="{{ $data->id }}">
+                    {{$data->master_ruangan->nama_ruangan}}
                 </td>
             </tr>
         @endforeach

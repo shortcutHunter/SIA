@@ -38,6 +38,7 @@ Route::resource('/admin/jurusan', 'FromMasterJurusanController');
 
 // form master data diri
 Route::resource('/admin/inputagama', 'FromAgamaController');
+Route::resource('/admin/inputpendidikan', 'FromPendidikanController');
 
 // form master karyawan
 Route::resource('/admin/dosen', 'FromDosenController');
@@ -46,6 +47,8 @@ Route::resource('/admin/dosen', 'FromDosenController');
 Route::resource('/admin/master-role', 'FromMasterRoleController');
 Route::resource('/admin/ruang-kuliah', 'FromMasterRuangKuliahController');
 Route::resource('/admin/jenis-perkuliahan', 'FromMasterJenisPerkuliahanController');
+Route::resource('/admin/status-dosen', 'FormStatusDosenController');
+Route::resource('/admin/status-kerja-dosen', 'FormMasterStatusKerjaDosenController');
 
 
 // public route

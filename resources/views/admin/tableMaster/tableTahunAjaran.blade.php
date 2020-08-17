@@ -15,23 +15,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($datas as $key=>$tahun_ajaran)
+        @foreach($datas as $key=>$data)
             <tr>
                 <td>
-                    <input id="check{{$tahun_ajaran->id}}" type="checkbox" value="{{$tahun_ajaran->id}}" class="filled-in chk-col-red table_check"/>
-                    <label for="check{{$tahun_ajaran->id}}"></label>
+                    <input id="check{{$data->id}}" type="checkbox" value="{{$data->id}}" class="filled-in chk-col-red table_check"/>
+                    <label for="check{{$data->id}}"></label>
                 </td>
-                <td class="view-info" row_id="{{ $tahun_ajaran->id }}">
-                    {{$tahun_ajaran->tahun_ajaran}}
+                <td class="view-info" row_id="{{ $data->id }}">
+                    {{$data->tahun_ajaran}}
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
-<div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_1_paginate">
-    <ul class="pagination">
-        {{ $datas->links() }}
-    </ul>
-</div>
 
 @endsection
