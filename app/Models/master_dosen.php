@@ -37,11 +37,11 @@ class master_dosen extends BaseModel
     }
 
     public function setTanggalLahirAttribute( $value ) {
-      $this->attributes['tanggal_lahir'] = (new Carbon($value))->format('d/m/y');
+      $this->attributes['tanggal_lahir'] = (new Carbon($value))->format('Y-m-d');
     }
 
     public function setMulaiBekerjaAttribute( $value ) {
-      $this->attributes['mulai_bekerja'] = (new Carbon($value))->format('d/m/y');
+      $this->attributes['mulai_bekerja'] = (new Carbon($value))->format('Y-m-d');
     }
 
     public function getTanggalLahirAttribute($value)
